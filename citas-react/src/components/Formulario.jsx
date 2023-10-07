@@ -8,8 +8,8 @@ const Formulario = () => {
         Añade Pacientes y {' '} <span className="text-indigo-600 font-bold ">Administralos</span>
       </p>
 
-      <form className="bg-white shadow-md rounded-lg py-10 px-5">
-        <div>
+      <form className="bg-white shadow-md rounded-lg py-10 px-5 ml-5 mb-10">
+        <div className="mb-5">
           <label htmlFor="mascota" className="block text-gray-700 uppercase font-bold">
             Nombre mascota
           </label>
@@ -20,6 +20,58 @@ const Formulario = () => {
             placeholder="Nombre de la mascota"
           />
         </div>
+
+        <div className="mb-5">
+          <label htmlFor="propietario" className="block text-gray-700 uppercase font-bold">
+            Nombre del Propietario
+          </label>
+          <input
+            id="propietario"
+            className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            type="text"
+            placeholder="Nombre del Propietario"
+          />
+        </div>
+
+        <div className="mb-5">
+          <label htmlFor="email" className="block text-gray-700 uppercase font-bold">
+            Email de contacto
+          </label>
+          <input
+            id="email"
+            className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            type="email"
+            placeholder="Email contacto propietario"
+          />
+        </div>
+
+        <div className="mb-5">
+          <label htmlFor="alta" className="block text-gray-700 uppercase font-bold">
+            Fecha de alta
+          </label>
+          <input
+            id="alta"
+            className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            type="date"
+          />
+        </div>
+
+        <div className="mb-5">
+          <label htmlFor="sintomas" className="block text-gray-700 uppercase font-bold">
+            Sintomas
+          </label>
+          <textarea
+           id="sintomas"
+           className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+           placeholder="Describe los sintomas"
+          />
+        </div>
+
+        <input 
+          type="submit"
+          className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-all"
+          value="Agregar paciente"
+        />
       </form>
     </div>
   )
