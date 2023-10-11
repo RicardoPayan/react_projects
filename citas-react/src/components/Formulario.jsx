@@ -1,34 +1,40 @@
 import { useState, useEffect } from 'react'
 
 
-const Formulario = () => {
+const Formulario = ({setPacientes, pacientes}) => {
 
   const[nombre, setNombre] = useState('');
   const[propietario, setPropietario] = useState('');
   const[email, setEmail] = useState('');
   const[fecha, setFecha] = useState('');
   const[sintomas, setSintomas] = useState('');
+  const[error, setError] = useState(false);
 
 
   const handleSubmit = e => {
     e.preventDefault();
 
     // Validar formulario
-    if(nombre.trim() === '') {
-      console.log('El campo nombre esta vacio');
+    if([nombre, propietario, email, fecha, sintomas].includes('')) {
+      console.log('Todos los campos son obligatorios');
+      setError(true);
       return;
     }
 
-    // Crear objeto con los datos
-    const datos = {
-      nombre
-    }
+    setError(false);
 
-    // Enviar los datos al componente principal
-    console.log(datos);
+    // Crear objeto
+    const objetoPaciente = {nombre, propietario, email, fecha, sintomas};
 
-    // Reiniciar el formulario
+    setPacientes([...pacientes, objetoPaciente]);
+
+    //Resetear formulario
     setNombre('');
+    setPropietario('');
+    setEmail('');
+    setFecha('');
+    setSintomas('');
+
   }
 
 
@@ -44,6 +50,12 @@ const Formulario = () => {
         className="bg-white shadow-md rounded-lg py-10 px-5 ml-5 mb-10"
         onSubmit={handleSubmit}
       >
+        {error && (
+          <div>
+            <p className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-5 text-center rounded">Todos los campos son obligatorios</p>
+          </div>
+        )}
+
         <div className="mb-5">
           <label htmlFor="mascota" className="block text-gray-700 uppercase font-bold">
             Nombre mascota
