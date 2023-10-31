@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Error from './Error';
 
-const Formulario = ({setPacientes, pacientes}) => {
+const Formulario = ({setPacientes, pacientes, paciente}) => {
 
   const[nombre, setNombre] = useState('');
   const[propietario, setPropietario] = useState('');
@@ -10,12 +10,24 @@ const Formulario = ({setPacientes, pacientes}) => {
   const[sintomas, setSintomas] = useState('');
   const[error, setError] = useState(false);
 
+ 
   const generarId = () => {
     const random = Math.random().toString(36).substring(2);
     const fecha = Date.now().toString(36);
 
     return random + fecha;
   }
+
+  //Effect que escucha por modificaciones en el objeto de paciente, para la funcion de editar
+  useEffect(() => {
+    if(Object.keys(paciente).length > 0){
+      setNombre(paciente.nombre);
+      setPropietario(paciente.propietario);
+      setEmail(paciente.email);
+      setFecha(paciente.fecha);
+      setSintomas(paciente.sintomas);
+    }
+  },[paciente])
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -136,7 +148,7 @@ const Formulario = ({setPacientes, pacientes}) => {
         <input 
           type="submit"
           className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-all"
-          value="Agregar paciente"
+          value={paciente.id ? 'Editar Paciente' : 'Agregar Paciente'}
         />
       </form>
     </div>
